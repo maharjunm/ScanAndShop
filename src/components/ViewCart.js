@@ -4,6 +4,24 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class ViewCart extends React.Component {
 
+ constructor(props) {
+    super(props);
+    this.state = { count: 1 }
+ }
+    decrement() {
+        const { count } = this.state;
+        this.setState({count: count--});
+    }
+
+    increment() {
+        const { count } = this.state;
+        this.setState({count: count++});
+    }
+
+    isCountZero() {
+        return this.state.count !== 1;
+    }
+
   render() {
     return (
     <View style={{flex: 1, flexDirection:'column'}}>
@@ -20,9 +38,18 @@ export default class ViewCart extends React.Component {
             </TouchableHighlight>
          </View>
         <View style={styles.item}>
-            <Image style={styles.cart} source={require('./../../images/tomato.png')} />
+            <Image style={styles.cart} source={require('./../../images/tomato.jpg')} />
             <TouchableHighlight style={styles.itemDiv}>
                 <Text style={styles.itemText}> Tomatoes</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.itemDiv}>
+                <Text onPress={() => {this.decrement()}} editable={this.isCountZero()} style={styles.minus}>  - </Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.quantity}>
+                <Text> {this.state.count} KG </Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.itemDiv}>
+                <Text onPress={() => {this.increment()}}  style={styles.minusRight}> +</Text>
             </TouchableHighlight>
          </View>
      </View>
@@ -41,6 +68,9 @@ cart: {
     height: 30,
     width: 40,
     backgroundColor: 'white'
+},
+itemList: {
+    flexDirection: 'row',
 },
 item: {
   top: 70,
@@ -83,5 +113,30 @@ textStyle: {
 scrollViewStyle: {
   borderWidth: 2,
   borderColor: 'blue'
-}
+},
+quantity: {
+    left: 30,
+},
+minus: {
+    color:'black',
+    justifyContent: 'flex-end',
+    left: 20,
+    height: 30,
+    width: 30,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
+    fontSize: 25,
+  },
+minusRight: {
+    color:'black',
+    justifyContent: 'flex-end',
+    left: 40,
+    height: 30,
+    width: 30,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
+    fontSize: 25,
+  }
 });

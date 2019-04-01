@@ -21,7 +21,6 @@ export default class ScanScreen extends Component {
               ToastAndroid.BOTTOM,
             );
             const {navigate} = this.props.navigation;
-            navigate('ViewCart', {});
       }
 
       navigateToViewCart(event) {
